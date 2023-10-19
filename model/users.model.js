@@ -1,31 +1,26 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    // image: {
-    //     type: String,
-    //     required: true,
-    //     default: "default.png"
-    // },
+   
     name: {
         type: String,
-        required: true
+        required: 'Please enter your name',
+        trim: true
     },
     email: {
         type: String,
         unique:true,
-        required: true
+        required: 'Please enter your email',
+        trim: true,
+        lowercase:true,
+        validate: [{ validator: value => isEmail(value), msg: 'Invalid email.' }]
     },
-    password: {
-        type: String,
-        minlength: 8,
-        required: true,
-        unique: true
-    },
+    password: { type: String, required: true },
     address: {
         type: String
     },
-    telPhone: {
+    phone: {
         type: Number
     },
     date: {
